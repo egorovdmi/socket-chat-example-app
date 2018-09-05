@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from './chat/chat.service';
-import { ChatMessage } from './chat/events/chat-message';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +13,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.chatService.sendMessage(new ChatMessage('Garry', 'Hello!'));
+    this.chatService.sendMessage({ author: 'Garry', message: 'Hello!' });
     this.chatService.sendCommand();
   }
 }

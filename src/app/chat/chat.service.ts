@@ -1,10 +1,14 @@
-(window as any).global = window;
-
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { ChatEvent } from './events/chat-event';
+import { ChatMessage } from './events/chat-message';
+import { ChatCommand } from './events/chat-command';
 import io from 'socket.io-client';
+import { ChatCommandTypes } from './events/commands';
 
-const ServiceEndPoint = 'https://demo-chat-server.on.ag';
+// Put here endpoint as a constant in order to simplify the solution,
+// possible to move in the config somewhere in the future.
+const ServerHostname = 'https://demo-chat-server.on.ag';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +17,12 @@ export class ChatService {
   private socket: any = null;
   private waitUntilConnected: Promise<void>;
 
+  public commands = new Subject<ChatCommand>();
+  public messages = new Subject<ChatMessage>();
+
   constructor() {
     this.waitUntilConnected = new Promise((resolve) => {
-      this.socket = io(ServiceEndPoint, { autoConnect: false });
+      this.socket = io(ServerHostname, { autoConnect: false });
       this.socket.on('connect', () => {
         this.onConnect();
         resolve();
@@ -27,7 +34,7 @@ export class ChatService {
     this.socket.connect();
   }
 
-  sendMessage(event: ChatEvent): void {
+  sendMessage(event: ChatMessage): void {
     this.waitUntilConnected.then(() => {
       this.socket.emit('message', event);
     });
@@ -43,11 +50,13 @@ export class ChatService {
     console.log('connected!');
   }
 
-  private onMessage(data: any) {
-    console.log('message', data);
+  private onMessage(message: ChatMessage) {
+    console.log('message', message);
+    this.messages.next(message);
   }
 
-  private onCommand(data: any) {
-    console.log('command', data);
+  private onCommand(command: ChatCommand) {
+    console.log('command', command);
+    this.commands.next(command);
   }
 }

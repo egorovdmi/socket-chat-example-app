@@ -1,8 +1,6 @@
 import { ChatEvent } from './chat-event';
+import { CommandsUnion } from './commands';
 
-export interface ChatCommand<T> extends ChatEvent {
-    command: {
-        type: string;
-        data: T;
-    };
+export interface ChatCommand extends ChatEvent {
+    command: CommandsUnion;
 }
