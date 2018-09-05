@@ -40,7 +40,7 @@ export class ChatService {
     });
   }
 
-  sendCommand(): void {
+  fetchCommand(): void {
     this.waitUntilConnected.then(() => {
       this.socket.emit('command');
     });

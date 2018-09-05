@@ -19,4 +19,4 @@ export class ReceivedCommand implements Action {
     constructor(public payload: CommandsUnion) {}
 }
 
-export type BookActionsUnion = ReceivedMessage | ReceivedCommand;
+export type ChatApiActionsUnion = ReceivedMessage | ReceivedCommand;

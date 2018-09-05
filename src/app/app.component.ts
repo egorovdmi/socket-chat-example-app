@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatService } from './chat/chat.service';
+import { Store } from '@ngrx/store';
+import { ChatActions } from './chat/actions';
+import * as fromChat from './chat/reducers/chat.reducer';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +11,14 @@ import { ChatService } from './chat/chat.service';
 export class AppComponent implements OnInit {
   title = 'socket-chat-example-app';
 
-  constructor(private chatService: ChatService) {
-  }
+  constructor(private store: Store<fromChat.State>) {}
 
   ngOnInit() {
-    this.chatService.sendMessage({ author: 'Garry', message: 'Hello!' });
-    this.chatService.sendCommand();
+    this.store.dispatch(
+      new ChatActions.SendMessage({ author: 'Garry', message: 'Hello!' })
+    );
+    this.store.dispatch(
+      new ChatActions.FetchCommand()
+    );
   }
 }
