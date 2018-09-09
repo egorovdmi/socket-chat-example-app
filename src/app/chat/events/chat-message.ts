@@ -1,5 +1,8 @@
 import { ChatEvent } from './chat-event';
 
-export interface ChatMessage extends ChatEvent {
-    message: string;
+export class ChatMessage implements ChatEvent {
+    constructor (
+        public author: string, 
+        public message: string, 
+        public isResponse: boolean = false) {}
 }

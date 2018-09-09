@@ -1,0 +1,59 @@
+:host {
+    -webkit-flex: 1 1 0;
+    flex: 1 1 0;
+    position: relative;
+    z-index: 1;
+}
+
+.overflow-area {
+    box-sizing: border-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    top: 0;
+    transition: background .3s ease-out .1s;
+    width: 100%;
+    z-index: 100;
+    border-left: 1px solid rgba(0, 0, 0, 0.03);
+    border-right: 1px solid rgba(0, 0, 0, 0.03);
+    -webkit-overflow-scrolling: touch;
+}
+
+.spacer {
+    flex: 1 1 auto;
+    min-height: 12px;
+}
+
+.chat-content {
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+    align-items: flex-end;
+}
+
+.events-wrapper {
+    width: 100%;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.right {
+    flex-direction: row-reverse;
+}
+
+.alert-primary {
+    color: #fff;
+    background-color: #007bff;
+}
+
+.alert-secondary {
+    color: #000;
+    background-color: #fff;
+}

@@ -7,25 +7,25 @@ export enum ChatCommandTypes {
 
 export class DateCommand {
     readonly type = ChatCommandTypes.Date;
-    data: string;
+    constructor(public data: string) {}
 }
 
 export class MapCommand {
     readonly type = ChatCommandTypes.Map;
-    data: {
+    constructor(public data: {
         lat: number;
         lng: number;
-    };
+    }) {}
 }
 
 export class RateCommand {
     readonly type = ChatCommandTypes.Rate;
-    data: number[];
+    constructor(public data: number[]) {}
 }
 
 export class CompleteCommand {
     readonly type = ChatCommandTypes.Complete;
-    data: string[];
+    constructor(public data: string[]) {}
 }
 
 export type CommandsUnion =

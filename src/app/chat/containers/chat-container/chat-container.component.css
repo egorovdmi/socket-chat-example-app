@@ -1,0 +1,29 @@
+.chat-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 56px);
+  background-color: #e5ddd5;
+}
+  
+.chat-background {
+  top: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: url(https://s3.amazonaws.com/spoonflower/public/design_thumbnails/0364/8136/r90s_shapes_final_black_white_highres.png);
+  opacity: 0.06;
+}
+
+footer {
+  background-color: #f5f1ee;
+  min-height: 62px;
+  -webkit-order: 2;
+  order: 2;
+  position: relative;
+  -webkit-flex: none;
+  flex: 0 0;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1;
+}

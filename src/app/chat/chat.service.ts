@@ -52,11 +52,13 @@ export class ChatService {
 
   private onMessage(message: ChatMessage) {
     console.log('message', message);
+    message.isResponse = true;
     this.messages.next(message);
   }
 
   private onCommand(command: ChatCommand) {
     console.log('command', command);
+    command.isResponse = true;
     this.commands.next(command);
   }
 }
