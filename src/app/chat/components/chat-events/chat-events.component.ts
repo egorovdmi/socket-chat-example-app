@@ -21,8 +21,6 @@ export class ChatEventsComponent implements OnInit {
     new ChatCommand('ottonova Bot', true, new CompleteCommand(['Yes', 'No'])),
   ];
 
-  //@Input() events: ChatEvent[] = [];
-
   @Output() response = new EventEmitter<CommandResponse>();
   @Output() complete = new EventEmitter<CommandResponse>();
 

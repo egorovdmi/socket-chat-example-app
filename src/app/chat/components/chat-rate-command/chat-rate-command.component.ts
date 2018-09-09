@@ -10,7 +10,7 @@ export class ChatRateCommandComponent implements OnInit {
   @Input() command: RateCommand;
   @Output() response = new EventEmitter<string>();
 
-  rateValues = [1,2,3,4,5];
+  rateValues = [1, 2, 3, 4, 5];
 
   constructor() { }
 

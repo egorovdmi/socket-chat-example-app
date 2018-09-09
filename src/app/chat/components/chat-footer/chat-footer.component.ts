@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat-footer.component.css']
 })
 export class ChatFooterComponent implements OnInit {
-  messageText: string = "";
+  messageText = '';
 
   constructor() { }
 
