@@ -1,0 +1,23 @@
+<div class="overflow-area">
+  <div class="chat-content">
+    <div class="spacer"></div>
+    <div class="events-wrapper">
+      <div class="row" *ngFor="let event of events; let i = index" [ngClass]="{ right: event.isResponse }">
+          <div class="col-9 alert" 
+            [ngClass]="{
+              'alert-primary': !event.isResponse,
+              'alert-secondary': event.isResponse,
+              'ml-3': !event.isResponse,
+              'mr-3': event.isResponse
+            }" [ngSwitch]="getEventType(event)">
+            <div class="small"><strong>{{event.author}}</strong></div>
+            <app-chat-message *ngSwitchCase="'message'" [event]="event"></app-chat-message>
+            <app-chat-date-command *ngSwitchCase="'date'" [command]="event.command"></app-chat-date-command>
+            <app-chat-map-command *ngSwitchCase="'map'" [command]="event.command"></app-chat-map-command>
+            <app-chat-rate-command *ngSwitchCase="'rate'" [command]="event.command"></app-chat-rate-command>
+            <app-chat-complete-command *ngSwitchCase="'complete'" [command]="event.command"></app-chat-complete-command>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

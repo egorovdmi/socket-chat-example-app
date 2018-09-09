@@ -3,10 +3,12 @@ import { ChatEvent } from '../events/chat-event';
 
 export interface State {
     events: ChatEvent[];
+    completed: boolean;
 }
 
 const initialState: State = {
     events: [],
+    completed: false,
 };
 
 export function reducer(
