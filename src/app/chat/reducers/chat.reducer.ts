@@ -16,6 +16,13 @@ export function reducer(
     action: ChatActions.ChatActionsUnion | ChatApiActions.ChatApiActionsUnion
 ): State {
     switch (action.type) {
+        case ChatActions.ChatActionTypes.SendMessage:
+        case ChatApiActions.ChatApiActionTypes.ReceivedMessage:
+        case ChatApiActions.ChatApiActionTypes.ReceivedCommand:
+            return {
+                ...state,
+                events: [...state.events, action.payload]
+            };
         default:
             return state;
     }

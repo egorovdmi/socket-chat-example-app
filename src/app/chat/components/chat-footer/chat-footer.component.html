@@ -1,13 +1,18 @@
 <div class="footer-container form-group m-0 pl-3 pr-3">
-  <input [(ngModel)]="messageText" type="text" class="form-control" placeholder="Enter a message">
+  <input 
+    [(ngModel)]="messageText" 
+    (keyup.enter)="onEnter()" 
+    type="text"
+    class="form-control"
+    placeholder="Enter your text" />
   <div class="btn-group dropup" role="group">
     <button [disabled]="!messageText.length" (click)="dropdown.style.display='block'" type="button" class="btn btn-primary dropdown-toggle"
       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Send
     </button>
     <div #dropdown class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-      <a (click)="dropdown.style.display='none'" class="dropdown-item">Message</a>
-      <a (click)="dropdown.style.display='none'" class="dropdown-item">Command</a>
+      <a (click)="onMessage(dropdown)" class="dropdown-item">Message</a>
+      <a (click)="onCommand(dropdown)" class="dropdown-item">Command</a>
     </div>
   </div>
 </div>

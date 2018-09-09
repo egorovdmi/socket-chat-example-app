@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, tap } from 'rxjs/operators';
 
 import { ChatService } from '../chat.service';
-import { ChatActions } from '../actions/index';
+import { ChatActions, ChatApiActions } from '../actions/index';
 
 @Injectable()
 export class ChatEffects {
@@ -18,6 +18,16 @@ export class ChatEffects {
     fetchMessage$ = this.actions$.pipe(
         ofType<ChatActions.FetchCommand>(ChatActions.ChatActionTypes.FetchCommand),
         tap(message => this.chatService.fetchCommand())
+    );
+
+    @Effect()
+    receivedMessage$ = this.chatService.messages.pipe(
+        map(message => new ChatApiActions.ReceivedMessage(message))
+    );
+
+    @Effect()
+    receivedCommand$ = this.chatService.commands.pipe(
+        map(command => new ChatApiActions.ReceivedCommand(command))
     );
 
     constructor(

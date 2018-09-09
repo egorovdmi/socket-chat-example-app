@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { ChatMessage } from '../events/chat-message';
-import { CommandsUnion } from '../events/commands';
+import { ChatCommand } from '../events/chat-command';
 
 export enum ChatApiActionTypes {
   ReceivedMessage = '[Chat/API] Received message',
@@ -16,7 +16,7 @@ export class ReceivedMessage implements Action {
 export class ReceivedCommand implements Action {
     readonly type = ChatApiActionTypes.ReceivedCommand;
 
-    constructor(public payload: CommandsUnion) {}
+    constructor(public payload: ChatCommand) {}
 }
 
 export type ChatApiActionsUnion = ReceivedMessage | ReceivedCommand;

@@ -12,15 +12,17 @@ import { CommandResponse } from '../../models/command-response';
 })
 export class ChatEventsComponent implements OnInit {
 
-  @Input() events: ChatEvent[] = [
-    new ChatMessage('Dmitry', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus tenetur, quasi pariatur dolorum eveniet praesentium placeat quibusdam cumque vitae ea ad exercitationem temporibus consequuntur eaque deleniti, eos voluptatum qui ipsum.'),
-    new ChatMessage('ottonova Bot', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus tenetur, quasi pariatur dolorum eveniet praesentium placeat quibusdam cumque vitae ea ad exercitationem temporibus consequuntur eaque deleniti, eos voluptatum qui ipsum.', true),
-    new ChatCommand('ottonova Bot', true, new DateCommand('2018-09-09T15:57:13.770Z')),
-    new ChatCommand('ottonova Bot', true, new MapCommand({ lat: 51.678418, lng: 7.809007 })),
-    new ChatCommand('ottonova Bot', true, new RateCommand([1, 5])),
-    new ChatCommand('ottonova Bot', true, new CompleteCommand(['Yes', 'No'])),
-  ];
+  // TODO: Remove below code.
+  // @Input() events: ChatEvent[] = [
+  //   new ChatMessage('Dmitry', 'Lorem, ipsum dolor sit amet.'),
+  //   new ChatMessage('ottonova Bot', 'Lorem, ipsum dolor sit.', true),
+  //   new ChatCommand('ottonova Bot', true, new DateCommand('2018-09-09T15:57:13.770Z')),
+  //   new ChatCommand('ottonova Bot', true, new MapCommand({ lat: 51.678418, lng: 7.809007 })),
+  //   new ChatCommand('ottonova Bot', true, new RateCommand([1, 5])),
+  //   new ChatCommand('ottonova Bot', true, new CompleteCommand(['Yes', 'No'])),
+  // ];
 
+  @Input() events: ChatEvent[];
   @Output() response = new EventEmitter<CommandResponse>();
   @Output() complete = new EventEmitter<CommandResponse>();
 
