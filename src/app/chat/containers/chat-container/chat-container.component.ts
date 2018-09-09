@@ -10,7 +10,6 @@ export class ChatContainerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
   }
 
 }
