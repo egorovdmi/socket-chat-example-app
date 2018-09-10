@@ -28,7 +28,7 @@ export function reducer(
         case ChatActions.ChatActionTypes.SendCommandResponse: {
             const events = [...state.events];
             events[action.payload.eventId] =
-                new ChatMessage(action.payload.author, action.payload.message);
+                new ChatMessage(action.payload.author, action.payload.message, true);
             return {
                 ...state,
                 events: events

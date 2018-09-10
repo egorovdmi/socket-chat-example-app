@@ -1,21 +1,16 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-chat-footer',
   templateUrl: './chat-footer.component.html',
   styleUrls: ['./chat-footer.component.css']
 })
-export class ChatFooterComponent implements OnInit {
+export class ChatFooterComponent {
   @Input() isCompleted: boolean;
   @Output() message = new EventEmitter<string>();
   @Output() command = new EventEmitter<string>();
 
   messageText = '';
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   onMessage(sender: HTMLElement) {
     sender.style.display = 'none';

@@ -10,12 +10,9 @@ import { SignIn } from '../models/sign-in';
   selector: 'app-signin',
   templateUrl: './signin.component.html'
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent {
 
   constructor(private store: Store<fromRoot.State>, private router: Router) { }
-
-  ngOnInit() {
-  }
 
   onSignin(form: NgForm) {
     const login = form.value.login;

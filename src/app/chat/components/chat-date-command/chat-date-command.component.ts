@@ -10,14 +10,9 @@ const workingDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
   templateUrl: './chat-date-command.component.html',
   styleUrls: ['./chat-date-command.component.css']
 })
-export class ChatDateCommandComponent implements OnInit {
+export class ChatDateCommandComponent {
   @Input() command: DateCommand;
   @Output() response = new EventEmitter<string>();
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   getDays(isoDateString: string): string[] {
     const date = new Date(isoDateString);

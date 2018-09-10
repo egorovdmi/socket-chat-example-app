@@ -5,8 +5,8 @@ import { ChatActions } from '../../actions';
 import { ChatMessage } from '../../events/chat-message';
 import { ChatEvent } from '../../events/chat-event';
 import { CommandResponse } from '../../models/command-response';
+import { take } from '../../../../../node_modules/rxjs/operators';
 import * as fromRoot from '../../../reducers';
-import { take, tap } from '../../../../../node_modules/rxjs/operators';
 
 @Component({
   selector: 'app-chat-container',
@@ -45,6 +45,7 @@ export class ChatContainerComponent implements OnInit {
     ).subscribe(login => {
       response.author = login;
       this.store.dispatch(new ChatActions.SendCommandResponse(response));
+      this.store.dispatch(new ChatActions.SendMessage(new ChatMessage(login, response.message)));
     });
   }
 
@@ -55,6 +56,7 @@ export class ChatContainerComponent implements OnInit {
     ).subscribe(login => {
       response.author = login;
       this.store.dispatch(new ChatActions.SendCommandResponse(response));
+      this.store.dispatch(new ChatActions.SendMessage(new ChatMessage(login, response.message)));
 
       if (response.message === 'Yes') {
         this.store.dispatch(new ChatActions.Complete());

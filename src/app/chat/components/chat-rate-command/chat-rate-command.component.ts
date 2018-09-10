@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { RateCommand } from '../../events/commands';
 
 @Component({
@@ -6,14 +6,9 @@ import { RateCommand } from '../../events/commands';
   templateUrl: './chat-rate-command.component.html',
   styleUrls: ['./chat-rate-command.component.css']
 })
-export class ChatRateCommandComponent implements OnInit {
+export class ChatRateCommandComponent {
   @Input() command: RateCommand;
   @Output() response = new EventEmitter<string>();
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   getRateOptions(): number[] {
     // unexpected data
