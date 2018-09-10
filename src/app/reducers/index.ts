@@ -21,6 +21,7 @@ import { storeFreeze } from 'ngrx-store-freeze';
  * notation packages up all of the exports into a single object.
  */
 import * as fromChat from '../chat/reducers/chat.reducer';
+import * as fromAuth from '../auth/reducers/auth.reducer';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -28,6 +29,7 @@ import * as fromChat from '../chat/reducers/chat.reducer';
  */
 export interface State {
     chat: fromChat.State;
+    auth: fromAuth.State;
 }
 
 /**
@@ -37,6 +39,7 @@ export interface State {
  */
 export const reducers: ActionReducerMap<State> = {
     chat: fromChat.reducer,
+    auth: fromAuth.reducer,
 };
 
 // console.log all actions
@@ -59,6 +62,23 @@ export const metaReducers: MetaReducer<State>[] = !environment.production
     : [];
 
 /**
+ * Auth Reducers
+ */
+export const getAuthState = createFeatureSelector<State, fromAuth.State>(
+    'auth'
+);
+
+export const getLogin = createSelector(
+    getAuthState,
+    fromAuth.getLogin
+);
+
+export const getIsLoggedIn = createSelector(
+    getAuthState,
+    fromAuth.getIsLoggedIn
+);
+
+/**
  * Chat Reducers
  */
 export const getChatState = createFeatureSelector<State, fromChat.State>(
@@ -68,4 +88,9 @@ export const getChatState = createFeatureSelector<State, fromChat.State>(
 export const getChatEvents = createSelector(
     getChatState,
     fromChat.getChatEvents
+);
+
+export const getChatIsCompleted = createSelector(
+    getChatState,
+    fromChat.getIsCompleted
 );

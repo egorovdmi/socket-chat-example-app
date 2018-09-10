@@ -1,16 +1,17 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, OnChanges, AfterViewChecked } from '@angular/core';
 import { ChatEvent } from '../../events/chat-event';
-import { ChatMessage } from '../../events/chat-message';
-import { DateCommand, MapCommand, RateCommand, CompleteCommand } from '../../events/commands';
+// import { ChatMessage } from '../../events/chat-message';
+// import { DateCommand, MapCommand, RateCommand, CompleteCommand } from '../../events/commands';
 import { ChatCommand } from '../../events/chat-command';
 import { CommandResponse } from '../../models/command-response';
+import { ChatMessage } from '../../events/chat-message';
 
 @Component({
   selector: 'app-chat-events',
   templateUrl: './chat-events.component.html',
   styleUrls: ['./chat-events.component.css']
 })
-export class ChatEventsComponent implements OnInit {
+export class ChatEventsComponent implements OnInit, AfterViewChecked {
 
   // TODO: Remove below code.
   // @Input() events: ChatEvent[] = [
@@ -23,16 +24,34 @@ export class ChatEventsComponent implements OnInit {
   // ];
 
   @Input() events: ChatEvent[];
+  @Input() isCompleted = false;
   @Output() response = new EventEmitter<CommandResponse>();
   @Output() complete = new EventEmitter<CommandResponse>();
+  @ViewChild('overflowArea') overflowArea: ElementRef<HTMLDivElement>;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  ngAfterViewChecked() {
+    this.overflowArea.nativeElement.scrollTo(0, this.overflowArea.nativeElement.scrollHeight);
+  }
+
   getEventType(event: ChatEvent) {
     const chatCommand = event as ChatCommand;
     return chatCommand.command ? chatCommand.command.type : 'message';
+  }
+
+  onResponse(id: number, message: string) {
+    if (!this.isCompleted) {
+      this.response.emit(new CommandResponse(id, message));
+    }
+  }
+
+  onComplete(id: number, message: string) {
+    if (!this.isCompleted) {
+      this.complete.emit(new CommandResponse(id, message));
+    }
   }
 }

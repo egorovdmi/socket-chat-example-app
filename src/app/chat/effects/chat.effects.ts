@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, tap } from 'rxjs/operators';
 
 import { ChatService } from '../chat.service';
-import { ChatActions, ChatApiActions } from '../actions/index';
+import { ChatActions, ChatApiActions } from '../actions';
 
 @Injectable()
 export class ChatEffects {

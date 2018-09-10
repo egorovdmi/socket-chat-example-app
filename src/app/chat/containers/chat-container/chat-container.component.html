@@ -2,8 +2,14 @@
 	<div class="col-md-8 col-lg-6 justify-content-center chat-container p-0">
 		<div class="chat-background">
     </div>
-		<app-chat-events [events]="events | async"></app-chat-events>
-		<app-chat-footer 
+		<app-chat-events 
+			[events]="events | async"
+			[isCompleted]="isCompleted | async"
+			(response)="onResponse($event)"
+			(complete)="onComplete($event)">
+		</app-chat-events>
+		<app-chat-footer
+			[isCompleted]="isCompleted | async"
 			(command)="onFetchCommand($event)" 
 			(message)="onSendMessage($event)">
 		</app-chat-footer>

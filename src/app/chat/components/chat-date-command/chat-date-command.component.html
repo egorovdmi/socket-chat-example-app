@@ -1,4 +1,7 @@
 <div>Please select the most suitable day for the appointment.</div>
 <div>
-  <button *ngFor="let day of days" class="btn btn-primary btn-sm mr-1 mt-1" (click)="onDay(day)">{{day}}</button>
+  <button 
+    *ngFor="let day of getDays(command.data)"
+    (click)="response.emit(day)"
+    class="btn btn-primary btn-sm mr-1 mt-1">{{day}}</button>
 </div>

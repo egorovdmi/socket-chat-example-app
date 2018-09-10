@@ -1,4 +1,4 @@
-<div class="overflow-area">
+<div #overflowArea class="overflow-area">
   <div class="chat-content">
     <div class="spacer"></div>
     <div class="events-wrapper">
@@ -12,11 +12,16 @@
             }" [ngSwitch]="getEventType(event)">
             <div class="small"><strong>{{event.author}}</strong></div>
             <app-chat-message *ngSwitchCase="'message'" [event]="event"></app-chat-message>
-            <app-chat-date-command *ngSwitchCase="'date'" [command]="event.command"></app-chat-date-command>
-            <app-chat-map-command *ngSwitchCase="'map'" [command]="event.command"></app-chat-map-command>
-            <app-chat-rate-command *ngSwitchCase="'rate'" [command]="event.command"></app-chat-rate-command>
-            <app-chat-complete-command *ngSwitchCase="'complete'" [command]="event.command"></app-chat-complete-command>
+            <app-chat-date-command *ngSwitchCase="'date'" [command]="event.command" (response)="onResponse(i, $event)"></app-chat-date-command>
+            <app-chat-map-command *ngSwitchCase="'map'" [command]="event.command" (response)="onResponse(i, $event)"></app-chat-map-command>
+            <app-chat-rate-command *ngSwitchCase="'rate'" [command]="event.command" (response)="onResponse(i, $event)"></app-chat-rate-command>
+            <app-chat-complete-command *ngSwitchCase="'complete'" [command]="event.command" (response)="onComplete(i, $event)"></app-chat-complete-command>
           </div>
+      </div>
+      <div class="row" *ngIf="isCompleted">
+        <div class="col-9 ml-3">
+          Chat is completed. You can sign out.
+        </div>
       </div>
     </div>
   </div>

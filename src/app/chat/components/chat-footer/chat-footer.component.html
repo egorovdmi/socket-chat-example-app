@@ -1,12 +1,13 @@
 <div class="footer-container form-group m-0 pl-3 pr-3">
-  <input 
+  <input
+    [disabled]="isCompleted"
     [(ngModel)]="messageText" 
     (keyup.enter)="onEnter()" 
     type="text"
     class="form-control"
-    placeholder="Enter your text" />
+    placeholder="Enter your text or leave empty to fetch a command" />
   <div class="btn-group dropup" role="group">
-    <button [disabled]="!messageText.length" (click)="dropdown.style.display='block'" type="button" class="btn btn-primary dropdown-toggle"
+    <button [disabled]="isCompleted" (click)="dropdown.style.display='block'" type="button" class="btn btn-primary dropdown-toggle"
       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Send
     </button>

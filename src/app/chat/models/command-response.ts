@@ -1,6 +1,6 @@
-import { ChatMessage } from '../events/chat-message';
-
-export interface CommandResponse {
-    commandId: number;
-    message: ChatMessage;
+export class CommandResponse {
+    constructor(
+        public eventId: number,
+        public message: string,
+        public author: string = '') { }
 }

@@ -20,3 +20,7 @@ input[type='text'] {
     border-radius: 21px;
     margin-right: 10px;
 }
+
+.dropdown-item {
+    cursor: pointer;
+}

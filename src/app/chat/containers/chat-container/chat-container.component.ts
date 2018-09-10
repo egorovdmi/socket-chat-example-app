@@ -4,7 +4,9 @@ import { Store, select } from '@ngrx/store';
 import { ChatActions } from '../../actions';
 import { ChatMessage } from '../../events/chat-message';
 import { ChatEvent } from '../../events/chat-event';
+import { CommandResponse } from '../../models/command-response';
 import * as fromRoot from '../../../reducers';
+import { take, tap } from '../../../../../node_modules/rxjs/operators';
 
 @Component({
   selector: 'app-chat-container',
@@ -14,11 +16,13 @@ import * as fromRoot from '../../../reducers';
 export class ChatContainerComponent implements OnInit {
 
   events: Observable<ChatEvent[]>;
+  isCompleted: Observable<boolean>;
 
   constructor(private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
     this.events = this.store.pipe(select(fromRoot.getChatEvents));
+    this.isCompleted = this.store.pipe(select(fromRoot.getChatIsCompleted));
   }
 
   onFetchCommand(message: string) {
@@ -26,7 +30,35 @@ export class ChatContainerComponent implements OnInit {
   }
 
   onSendMessage(message: string) {
-    // TODO: use real credentials
-    this.store.dispatch(new ChatActions.SendMessage(new ChatMessage('Dmitry', message)));
+    this.store.pipe(
+      select(fromRoot.getLogin),
+      take(1),
+    ).subscribe(login =>
+      this.store.dispatch(new ChatActions.SendMessage(new ChatMessage(login, message)))
+    );
+  }
+
+  onResponse(response: CommandResponse) {
+    this.store.pipe(
+      select(fromRoot.getLogin),
+      take(1),
+    ).subscribe(login => {
+      response.author = login;
+      this.store.dispatch(new ChatActions.SendCommandResponse(response));
+    });
+  }
+
+  onComplete(response: CommandResponse) {
+    this.store.pipe(
+      select(fromRoot.getLogin),
+      take(1),
+    ).subscribe(login => {
+      response.author = login;
+      this.store.dispatch(new ChatActions.SendCommandResponse(response));
+
+      if (response.message === 'Yes') {
+        this.store.dispatch(new ChatActions.Complete());
+      }
+    });
   }
 }

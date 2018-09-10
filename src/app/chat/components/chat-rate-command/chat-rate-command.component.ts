@@ -10,10 +10,27 @@ export class ChatRateCommandComponent implements OnInit {
   @Input() command: RateCommand;
   @Output() response = new EventEmitter<string>();
 
-  rateValues = [1, 2, 3, 4, 5];
-
   constructor() { }
 
   ngOnInit() {
+  }
+
+  getRateOptions(): number[] {
+    // unexpected data
+    if (this.command.data.length < 2) {
+      return this.command.data;
+    }
+
+    // unexpected data
+    if (this.command.data[0] > this.command.data[1]) {
+      return this.command.data;
+    }
+
+    // everything's fine, could continue
+    const result = [];
+    for (let i = this.command.data[0]; i <= this.command.data[1]; i++) {
+      result.push(i);
+    }
+    return result;
   }
 }

@@ -6,6 +6,7 @@ export enum ChatActionTypes {
   SendMessage = '[Chat] Send message',
   FetchCommand = '[Chat] Fetch command',
   SendCommandResponse = '[Chat] Send command response',
+  Complete = '[Chat] Complete',
 }
 
 export class SendMessage implements Action {
@@ -24,4 +25,10 @@ export class SendCommandResponse implements Action {
   constructor(public payload: CommandResponse) {}
 }
 
-export type ChatActionsUnion = SendMessage | FetchCommand | SendCommandResponse;
+export class Complete implements Action {
+  readonly type = ChatActionTypes.Complete;
+
+  constructor() {}
+}
+
+export type ChatActionsUnion = SendMessage | FetchCommand | SendCommandResponse | Complete;

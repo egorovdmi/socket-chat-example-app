@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-chat-footer',
@@ -6,6 +6,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./chat-footer.component.css']
 })
 export class ChatFooterComponent implements OnInit {
+  @Input() isCompleted: boolean;
   @Output() message = new EventEmitter<string>();
   @Output() command = new EventEmitter<string>();
 
@@ -18,22 +19,33 @@ export class ChatFooterComponent implements OnInit {
 
   onMessage(sender: HTMLElement) {
     sender.style.display = 'none';
-    this.message.emit(this.messageText);
-    this.messageText = '';
+    this.sendMessage();
   }
 
   onCommand(sender: HTMLElement) {
     sender.style.display = 'none';
+
+    if (this.isCompleted) {
+      return;
+    }
+
     this.command.emit(this.messageText);
     this.messageText = '';
   }
 
   onEnter() {
-    if (this.messageText.length > 0) {
-      this.message.emit(this.messageText);
-      this.messageText = '';
-    } else {
+    if (!this.sendMessage() && !this.isCompleted) {
       this.command.emit(this.messageText);
     }
+  }
+
+  sendMessage(): boolean {
+    if (this.messageText.length === 0 || this.isCompleted) {
+      return false;
+    }
+
+    this.message.emit(this.messageText);
+    this.messageText = '';
+    return true;
   }
 }
