@@ -1,17 +1,29 @@
 <div class="footer-container form-group m-0 pl-3 pr-3">
   <input
     [disabled]="isCompleted"
-    [(ngModel)]="messageText" 
-    (keyup.enter)="onEnter()" 
+    [(ngModel)]="messageText"
+    (keyup.enter)="onEnter()"
     type="text"
     class="form-control"
-    placeholder="Enter your text or leave empty to fetch a command" />
+    placeholder="Enter your message or leave empty to fetch a command"
+  />
   <div class="btn-group dropup" role="group">
-    <button [disabled]="isCompleted" (click)="dropdown.style.display='block'" type="button" class="btn btn-primary dropdown-toggle"
-      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button
+      [disabled]="isCompleted"
+      (click)="dropdown.style.display = 'block'"
+      type="button"
+      class="btn btn-primary dropdown-toggle"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
       Send
     </button>
-    <div #dropdown class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+    <div
+      #dropdown
+      class="dropdown-menu dropdown-menu-right"
+      aria-labelledby="btnGroupDrop1"
+    >
       <a (click)="onMessage(dropdown)" class="dropdown-item">Message</a>
       <a (click)="onCommand(dropdown)" class="dropdown-item">Command</a>
     </div>
